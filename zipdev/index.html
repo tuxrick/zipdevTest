@@ -98,6 +98,10 @@
 				font-size: 12px;
 				font-weight: 300;
 			}
+
+			.sentence_result{
+				text-align: center;
+			}
 								
 		</style>			
 		
@@ -184,16 +188,24 @@
 				
 				<div class="col-md-12">
 					<h4>Sentence</h4>
-					<p id="result4">Result1</p>
-					<p id="result5">Result1</p>
-					<p id="sentence_result" >Sentence result</p>
-					
+					<div class="row">
+						<div class="col-md-6">
+							<p id="result4"></p>
+						</div>
+						<div class="col-md-6">	
+							<p id="result5"></p>
+						</div>						
+					</div>
+					<p id="sentence_result" >Sentence result</p>					
 				</div>												
 			</div>
 
 		</div>
 		
 		<div id="restaurants">
+			<br>
+			<h1>Please don't forget to visit San Diego Restaurants</h1>
+			<br>
 <!--
 			<div class="card">
 				<div class="row">
@@ -279,19 +291,19 @@
 				$("#result1").html(results.question_one);
 	
 				if(document.getElementById('tech1').checked){
-					$("#tech1_answer").append(" Correct !");
+					$("#tech1_answer").append("<span style='color:green'> Correct!</span>");
 				}
 				if(document.getElementById('tech2').checked){
-					$("#tech2_answer").append(" Wrong !");
+					$("#tech2_answer").append("<span style='color:red'> Wrong!</span>");
 				}
 				if(document.getElementById('tech3').checked){
-					$("#tech3_answer").append(" Correct !");
+					$("#tech3_answer").append("<span style='color:green'> Correct!</span>");
 				}						
 				if(document.getElementById('tech4').checked){
-					$("#tech4_answer").append(" Wrong !");
+					$("#tech4_answer").append("<span style='color:red'> Wrong!</span>");
 				}			
 				if(document.getElementById('tech5').checked){
-					$("#tech5_answer").append(" Wrong !");
+					$("#tech5_answer").append("<span style='color:green'> Wrong!</span>");
 				}			
 				
 				function palindrome(str) {
@@ -304,9 +316,9 @@
 				var pali = palindrome(results.question_three);
 	
 				if(pali == true){
-					$("#result3").html(results.question_three + " is a correct palindrome !");
+					$("#result3").html(results.question_three + " is a <span style='color:green'> correct</span> palindrome !");
 				}else{
-					$("#result3").html(results.question_three + " is a wrong palindrome !");
+					$("#result3").html(results.question_three + " is a <span style='color:red'> wrong</span> palindrome !");
 				}
 	
 				function ReverseString(str) { 
@@ -336,9 +348,9 @@
 				var reverse_string = ReverseString(results.question_fourth);
 				
 				if(reverse_string == results.question_five){
-					$("#sentence_result").html("Correct ! ");
+					$("#sentence_result").html("<span style='color:green'>Correct reverse sentece!</span> ");
 				}else{
-					$("#sentence_result").html("Wrong ! ");
+					$("#sentence_result").html("<span style='color:red'>Wrong reverse sentece!</span> ");
 				}			
 			
 			}else{
@@ -402,7 +414,7 @@
 		//Api Key		fb4980e39edcce855d278c21487b00ab
 		
 		//San diego is 302
-/*		
+
 		var san_diego_places = [];
 		$.ajax({
 		    type: 'POST',
@@ -442,7 +454,7 @@
 			
 		});
 
-*/		
+		
 
 		
 	</script>
