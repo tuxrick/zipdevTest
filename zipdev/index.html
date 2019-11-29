@@ -10,7 +10,10 @@
 
 		
 		<style>
-			
+			h1,h3{
+				text-align: center;
+				width: 100%;
+			}
 			i{
 				font-size: 12px;
 				color: gray;
@@ -140,7 +143,7 @@
 					</div>
 					
 					<h3>Introduce a sentence and then the sentence in reverse</h3>
-					
+					<br>
 					<div class="form-group col-md-6">
 						<label for="question_fourth">Sentence</label>
 						<input type="text" class="form-control" id="question_fourth" placeholder="">
@@ -237,13 +240,7 @@
 		$("#restaurants").hide();		
 		
 		$("#finish_btn").click(function(){
-			
-			$("#quiz").hide();
-			
-			
-			$("#results").show();
-			$("#restaurants").show();
-			
+
 			var results = {
 				question_one: $("#question_one").val(),
 				tech_one: $("#tech1").val(),
@@ -255,72 +252,98 @@
 				question_fourth: $("#question_fourth").val(),
 				question_five: $("#question_five").val()
 			}
-			
-			$("#result1").html(results.question_one);
 
-			if(document.getElementById('tech1').checked){
-				$("#tech1_answer").append(" Correct !");
-			}
-			if(document.getElementById('tech2').checked){
-				$("#tech2_answer").append(" Wrong !");
-			}
-			if(document.getElementById('tech3').checked){
-				$("#tech3_answer").append(" Correct !");
-			}						
-			if(document.getElementById('tech4').checked){
-				$("#tech4_answer").append(" Wrong !");
-			}			
-			if(document.getElementById('tech5').checked){
-				$("#tech5_answer").append(" Wrong !");
-			}			
+			if(
+				(results.question_one != "")&&
+				(results.question_three != "")&&
+				(results.question_fourth != "")&&
+				(results.question_five != "")&&
+				(
+					(document.getElementById('tech1').checked == true )||
+					(document.getElementById('tech2').checked == true )||
+					(document.getElementById('tech3').checked == true )||
+					(document.getElementById('tech4').checked == true )||
+					(document.getElementById('tech5').checked == true )
+				)
+			){
+				
 			
-			function palindrome(str) {
-			  var re = /[\W_]/g;
-			  var lowRegStr = str.toLowerCase().replace(re, '');
-			  var reverseStr = lowRegStr.split('').reverse().join(''); 
-			  return reverseStr === lowRegStr;
-			}
-			
-			var pali = palindrome(results.question_three);
 
-			if(pali == true){
-				$("#result3").html(results.question_three + " is a correct palindrome !");
+			
+				$("#quiz").hide();
+				
+				
+				$("#results").show();
+				$("#restaurants").show();
+				
+				$("#result1").html(results.question_one);
+	
+				if(document.getElementById('tech1').checked){
+					$("#tech1_answer").append(" Correct !");
+				}
+				if(document.getElementById('tech2').checked){
+					$("#tech2_answer").append(" Wrong !");
+				}
+				if(document.getElementById('tech3').checked){
+					$("#tech3_answer").append(" Correct !");
+				}						
+				if(document.getElementById('tech4').checked){
+					$("#tech4_answer").append(" Wrong !");
+				}			
+				if(document.getElementById('tech5').checked){
+					$("#tech5_answer").append(" Wrong !");
+				}			
+				
+				function palindrome(str) {
+				  var re = /[\W_]/g;
+				  var lowRegStr = str.toLowerCase().replace(re, '');
+				  var reverseStr = lowRegStr.split('').reverse().join(''); 
+				  return reverseStr === lowRegStr;
+				}
+				
+				var pali = palindrome(results.question_three);
+	
+				if(pali == true){
+					$("#result3").html(results.question_three + " is a correct palindrome !");
+				}else{
+					$("#result3").html(results.question_three + " is a wrong palindrome !");
+				}
+	
+				function ReverseString(str) { 
+				  
+				    // Check input 
+				    if(!str || str.length < 2 ||  
+				            typeof str!== 'string') { 
+				        return 'Not valid';  
+				    } 
+				      
+				    // Take empty array revArray 
+				    const revArray = []; 
+				    const length = str.length - 1; 
+				      
+				    // Looping from the end 
+				    for(let i = length; i >= 0; i--) { 
+				        revArray.push(str[i]); 
+				    } 
+				      
+				    // Joining the array elements 
+				    return revArray.join(''); 
+				} 			
+				
+				$("#result4").html(results.question_fourth);
+				$("#result5").html(results.question_five);
+				
+				var reverse_string = ReverseString(results.question_fourth);
+				
+				if(reverse_string == results.question_five){
+					$("#sentence_result").html("Correct ! ");
+				}else{
+					$("#sentence_result").html("Wrong ! ");
+				}			
+			
 			}else{
-				$("#result3").html(results.question_three + " is a wrong palindrome !");
+				alert("Please check your answers and complete the quiz");
 			}
-
-			function ReverseString(str) { 
-			  
-			    // Check input 
-			    if(!str || str.length < 2 ||  
-			            typeof str!== 'string') { 
-			        return 'Not valid';  
-			    } 
-			      
-			    // Take empty array revArray 
-			    const revArray = []; 
-			    const length = str.length - 1; 
-			      
-			    // Looping from the end 
-			    for(let i = length; i >= 0; i--) { 
-			        revArray.push(str[i]); 
-			    } 
-			      
-			    // Joining the array elements 
-			    return revArray.join(''); 
-			} 			
-			
-			$("#result4").html(results.question_fourth);
-			$("#result5").html(results.question_five);
-			
-			var reverse_string = ReverseString(results.question_fourth);
-			
-			if(reverse_string == results.question_five){
-				$("#sentence_result").html("Correct ! ");
-			}else{
-				$("#sentence_result").html("Wrong ! ");
-			}			
-			
 		});
 		
 
@@ -379,7 +402,7 @@
 		//Api Key		fb4980e39edcce855d278c21487b00ab
 		
 		//San diego is 302
-		
+/*		
 		var san_diego_places = [];
 		$.ajax({
 		    type: 'POST',
@@ -419,7 +442,7 @@
 			
 		});
 
-		
+*/		
 
 		
 	</script>
