@@ -378,7 +378,7 @@
 			
 			var total_places = san_diego_places.establishments.length;
 
-			for(var i=0; i<10; i++){
+			for(var i=0; i<total_places; i++){
 				$.ajax({
 				    type: 'POST',
 				    url: "https://developers.zomato.com/api/v2.1/restaurant?res_id=" + san_diego_places.establishments[i].establishment.id,
