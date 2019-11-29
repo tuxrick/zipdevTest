@@ -6,109 +6,19 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		<title>Zipdev</title>
 		<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+		<link href="css/style.css" rel="stylesheet" type="text/css">
 		<script src="https://kit.fontawesome.com/84f4d44bd3.js" crossorigin="anonymous"></script>
-
-		
-		<style>
-			h1,h3{
-				text-align: center;
-				width: 100%;
-			}
-			i{
-				font-size: 12px;
-				color: gray;
-			}
-			
-			.card{
-				border:solid 1px #b0b0b0;
-				min-height: 200px;
-				width: 95vw;
-				max-width: 75%;
-				margin-left: auto;
-				margin-right: auto;
-				display: block;
-				margin-bottom: 25px;
-				position: relative;
-				padding: 5px;
-			}
-			.card-img{
-				padding: 20px;
-			}
-			.card-title{
-				margin-top: 5px;						
-			}
-			.no-margin{
-				margin: 0px;
-				padding: 0px;
-			}
-			
-			.subtitle{
-				margin-top:70px;
-				color: gray;
-				font-size: 20px;
-			}
-			.details{
-				border-top:solid 1px #b0b0b0;		
-				width: 90%;
-				padding-top: 10px;
-				margin-left: 15px;
-				margin-top: 5px;
-				font-size: 15px;
-			}
-			
-			.schedule{
-				color: #0e7c39;
-			}
-			
-			.type{
-				color: red;
-			}			
-			
-			.cost{
-				color: gray;
-			}							
-			
-			.rating{
-				position: absolute;
-				right: 10px;
-				top: 10px;
-				background-color: #146D00;
-				width: 70px;
-				height: 40px;
-				color: white;
-			}
-			.rating_no{
-				font-weight: bold;
-				color:white;	
-				font-size: 25px;
-				margin-top: 0px;					
-				margin-left: 5px;
-			}					
-			.rating-total{
-				font-weight: bold;
-				color:white;	
-				color: #5DAC5E;					
-			}									
-
-			.votes{
-				position: absolute;
-				right: 20px;
-				top: 55px;
-				color: gray;
-				font-size: 12px;
-				font-weight: 300;
-			}
-
-			.sentence_result{
-				text-align: center;
-			}
-								
-		</style>			
-		
 	</head>
 	<body>
 		
 		<div class="container" id="quiz">
+			<div class="progress-container">
+				<div class="progress">
+					  <div id="progress" class="progress-bar" role="progressbar" style="width: 1%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+				</div>
+			</div>
+			
+			<br><br>
 			<h1>Quiz Time !</h1>			
 			<form>
 				<div class="form-row">
@@ -206,39 +116,8 @@
 			<br>
 			<h1>Please don't forget to visit San Diego Restaurants</h1>
 			<br>
-<!--
-			<div class="card">
-				<div class="row">
-					<div class="col-sm-4 no-margin" >
-						<img class="img-fluid card-img" src="https://cdn.kiwilimon.com/recetaimagen/34016/39654.jpg"/>
-					</div>							
-					<div class="col-sm-8 no-margin">
-						<div class="col-sm-9">
-							<h1 class="card-title">Miguel Cocina</h1>
-							<div class="subtitle">
-								<span class="subtitle1">Coronado </span>
-								<span class="subtitle2"> Casual Dining </span>
-							</div>	
-						</div>
-						<div class="details">
-							<span class="schedule">Open Now </span>
-							<span class="type">Mexican</span>
-							<span class="cost">Cost</span>
-						</div>							
-					</div>						
-				</div>						
-				<div class="rating">
-					<span class="rating_no">4.7</span><span class="rating-total">/5</span>
-				</div>
-				<div class="votes">
-					<span class="">749 votes</span>
-				</div>												
-			</div>	
--->				
 		</div>	
-		
-		
-		
+				
 	</body>
 	
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>	
@@ -250,6 +129,78 @@
 		
 		$("#results").hide();
 		$("#restaurants").hide();		
+
+
+		var q_one_progress = 0;
+		var q_two_progress = 0;
+		var q_three_progress = 0;
+		var q_four_progress = 0;
+		var q_five_progress = 0;
+		
+		var total_progress = 1;
+
+		$("#question_one").change(function(){
+			
+			if($("#question_one").val() != ""){
+				q_one_progress = 20; 	
+			}else{
+				q_one_progress = 0; 	
+			}
+			
+		});
+		
+		$("#question_three").change(function(){
+			
+			if($("#question_three").val() != ""){
+				q_three_progress = 20; 	
+			}else{
+				q_three_progress = 0; 	
+			}
+			
+		});
+
+		$("#question_fourth").change(function(){
+			
+			if($("#question_fourth").val() != ""){
+				q_four_progress = 25; 	
+			}else{
+				q_four_progress = 0; 	
+			}
+			
+		});
+		
+		$("#question_five").change(function(){
+			
+			if($("#question_five").val() != ""){
+				q_five_progress = 20; 	
+			}else{
+				q_five_progress = 0; 	
+			}
+			
+		});		
+		
+		
+		setInterval(function(){
+
+			if(
+				(document.getElementById('tech1').checked == true )||
+				(document.getElementById('tech2').checked == true )||
+				(document.getElementById('tech3').checked == true )||
+				(document.getElementById('tech4').checked == true )||
+				(document.getElementById('tech5').checked == true )
+			){
+				q_two_progress = 20;
+			}else{
+				q_two_progress = 0;
+			}
+			
+			total_progress = q_one_progress + q_two_progress +q_three_progress +q_four_progress +q_five_progress;
+			
+			$("#progress").attr("style", "width:"+total_progress+"%")
+			
+			
+		}, 100);		
+
 		
 		$("#finish_btn").click(function(){
 
