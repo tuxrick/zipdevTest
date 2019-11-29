@@ -6,16 +6,27 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		<title>Zipdev</title>
 		<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+		<script src="https://kit.fontawesome.com/84f4d44bd3.js" crossorigin="anonymous"></script>
+
+		
 		<style>
+			
+			i{
+				font-size: 12px;
+				color: gray;
+			}
+			
 			.card{
 				border:solid 1px #b0b0b0;
 				min-height: 200px;
 				width: 95vw;
+				max-width: 75%;
 				margin-left: auto;
 				margin-right: auto;
 				display: block;
 				margin-bottom: 25px;
 				position: relative;
+				padding: 5px;
 			}
 			.card-img{
 				padding: 20px;
@@ -39,7 +50,7 @@
 				padding-top: 10px;
 				margin-left: 15px;
 				margin-top: 5px;
-				font-size: 20px;
+				font-size: 15px;
 			}
 			
 			.schedule{
@@ -180,6 +191,7 @@
 		</div>
 		
 		<div id="restaurants">
+<!--
 			<div class="card">
 				<div class="row">
 					<div class="col-sm-4 no-margin" >
@@ -207,7 +219,9 @@
 					<span class="">749 votes</span>
 				</div>												
 			</div>	
-		</div>		
+-->				
+		</div>	
+		
 		
 		
 	</body>
@@ -309,6 +323,57 @@
 			
 		});
 		
+
+
+		function createCard(establishment){
+			
+			var card = "";
+			
+			card+='<div class="card">';
+			card+='	<div class="row">';
+			card+='		<div class="col-sm-4 no-margin" >';
+			
+			console.log("pepe pecas" + JSON.stringify(establishment));
+			
+			if(establishment.featured_image !== ""){
+				card+='			<img class="img-fluid card-img" src="'+establishment.featured_image+'"/>';
+			}else{
+				card+='			<img class="img-fluid card-img" src="https://cdn.kiwilimon.com/recetaimagen/34016/39654.jpg"/>';				
+			}
+			
+			
+			
+			card+='		</div>';							
+			card+='		<div class="col-sm-8 no-margin">';
+			card+='			<div class="col-sm-9">';
+			card+='				<h1 class="card-title">'+establishment.name+'</h1>';
+			card+='				<div class="subtitle">';
+			card+='					<span class="subtitle1">'+establishment.location.city+'</span>';
+			card+='					<span class="subtitle2"> <i class="fas fa-circle"></i> '+establishment.establishment[0]+'</span>';
+			card+='				</div>';
+			card+='			</div>'
+			card+='			<div class="details">';
+			card+='				<span class="schedule">Open Now </span> <i class="fas fa-circle"></i>';
+			card+='				<span class="type">'+establishment.cuisines+'</span> <i class="fas fa-circle"></i>';
+			card+='				<span class="cost">Costs $'+establishment.average_cost_for_two+' for two</span>';
+			card+='			</div>';
+			card+='		</div>';
+			card+='	</div>';		
+
+			
+			if(establishment.user_rating.aggregate_rating !== 0){
+				card+='	<div class="rating">';
+				card+='		<span class="rating_no">'+establishment.user_rating.aggregate_rating+'</span><span class="rating-total">/5</span>';
+				card+='	</div>';
+				card+='	<div class="votes">';
+				card+='		<span class="">'+establishment.user_rating.votes+' votes</span>';
+				card+='	</div>';												
+				card+='</div>';								
+			}			
+			
+			$("#restaurants").append(card);
+			
+		}
 		
 	
 		//Api Key		fb4980e39edcce855d278c21487b00ab
@@ -320,27 +385,37 @@
 		    type: 'POST',
 		    url: "https://developers.zomato.com/api/v2.1/establishments?city_id=302",
 		    headers: {
-		        "user-key":"fb4980e39edcce855d278c21487b00ab"
+		        "user-key":"94d9341d1ab7cac770402e6ff98a36a0"
 		    }
 		}).done(function(data) { 
 			san_diego_places = data;
 			
 			var total_places = san_diego_places.establishments.length;
 
-			for(var i=0; i<total_places; i++){
+			for(var i=0; i<10; i++){
 				$.ajax({
 				    type: 'POST',
 				    url: "https://developers.zomato.com/api/v2.1/restaurant?res_id=" + san_diego_places.establishments[i].establishment.id,
-				    //url: "https://developers.zomato.com/api/v2.1/restaurant?res_id=16",
 				    headers: {
-				        "user-key":"fb4980e39edcce855d278c21487b00ab"
-				    }
-				}).done(function(establisment_data) {
-					//console.log(establisment_data);
-					console.log(establisment_data);
-				});
+				        "user-key":"94d9341d1ab7cac770402e6ff98a36a0"
+				    },
+				    statusCode: {
+				        404: function() {
+				          console.log("page not found");
+				        }
+				    },				    
+					success:function(establisment_data) {						
+						
+						createCard(establisment_data);	
+												
+					},
+					error:function (xhr, ajaxOptions, thrownError){
+					    if(xhr.status==404) {
+					        console.log(thrownError);
+					    }
+					}    
+				})
 			}
-			
 			
 		});
 
