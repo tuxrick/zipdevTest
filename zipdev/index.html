@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<title>Zipdev</title>
+		<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+		<style>
+			.card{
+				border:solid 1px #b0b0b0;
+				min-height: 200px;
+				width: 95vw;
+				margin-left: auto;
+				margin-right: auto;
+				display: block;
+				margin-bottom: 25px;
+				position: relative;
+			}
+			.card-img{
+				padding: 20px;
+			}
+			.card-title{
+				margin-top: 5px;						
+			}
+			.no-margin{
+				margin: 0px;
+				padding: 0px;
+			}
+			
+			.subtitle{
+				margin-top:70px;
+				color: gray;
+				font-size: 20px;
+			}
+			.details{
+				border-top:solid 1px #b0b0b0;		
+				width: 90%;
+				padding-top: 10px;
+				margin-left: 15px;
+				margin-top: 5px;
+				font-size: 20px;
+			}
+			
+			.schedule{
+				color: #0e7c39;
+			}
+			
+			.type{
+				color: red;
+			}			
+			
+			.cost{
+				color: gray;
+			}							
+			
+			.rating{
+				position: absolute;
+				right: 10px;
+				top: 10px;
+				background-color: #146D00;
+				width: 70px;
+				height: 40px;
+				color: white;
+			}
+			.rating_no{
+				font-weight: bold;
+				color:white;	
+				font-size: 25px;
+				margin-top: 0px;					
+				margin-left: 5px;
+			}					
+			.rating-total{
+				font-weight: bold;
+				color:white;	
+				color: #5DAC5E;					
+			}									
+
+			.votes{
+				position: absolute;
+				right: 20px;
+				top: 55px;
+				color: gray;
+				font-size: 12px;
+				font-weight: 300;
+			}
+								
+		</style>			
+		
+	</head>
+	<body>
+		
+		<div class="container" id="quiz">
+			<h1>Quiz Time !</h1>			
+			<form>
+				<div class="form-row">
+					<div class="form-group col-md-12">
+						<label for="question_one">How do you describe yourself as a developer?</label>
+						<input type="text" class="form-control" id="question_one" placeholder="">
+					</div>
+					<div class="form-group col-md-12">
+						<label for="question_two">Select the Javascript based Technologies</label>
+						<br>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="checkbox" id="tech1" value="AngujarJS">
+							<label class="form-check-label" for="tech1">AngularJS</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="checkbox" id="tech2" value="Ember">
+							<label class="form-check-label" for="tech2">Ember</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="checkbox" id="tech3" value="VueJS">
+							<label class="form-check-label" for="tech3">VueJS</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="checkbox" id="tech4" value="Java">
+							<label class="form-check-label" for="tech4">Java</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="checkbox" id="tech5" value="C#">
+							<label class="form-check-label" for="tech5">C#</label>
+						</div>										
+					</div>
+					
+					<div class="form-group col-md-12">
+						<label for="question_three">Introduce a Palindrome</label>
+						<input type="text" class="form-control" id="question_three" placeholder="">
+					</div>
+					
+					<h3>Introduce a sentence and then the sentence in reverse</h3>
+					
+					<div class="form-group col-md-6">
+						<label for="question_fourth">Sentence</label>
+						<input type="text" class="form-control" id="question_fourth" placeholder="">
+					</div>					
+
+					<div class="form-group col-md-6">
+						<label for="question_five">Sentence in reverse</label>
+						<input type="text" class="form-control" id="question_five" placeholder="">
+					</div>										
+					
+				</div>	
+
+			</form>					
+			<button class="btn btn-primary" id="finish_btn">Finish</button>
+				
+		</div>		
+		<div class="container" id="results">
+			<h1>Results</h1>
+			<div class="row">
+				<div class="col-md-12">
+					<h4>How do you describe yourself as a developer?</h4>
+					<p id="result1">Result1</p>
+				</div>
+				
+				<div class="col-md-12">
+					<h4>Javascript based Technologies</h4>
+					<p id="tech1_answer">AngularJS </p>
+					<p id="tech2_answer">Ember</p>
+					<p id="tech3_answer">VueJS</p>
+					<p id="tech4_answer">Java</p>					
+					<p id="tech5_answer">C#</p>
+				</div>
+				
+				<div class="col-md-12">
+					<h4>Palindrome</h4>
+					<p id="result3">Result1</p>
+				</div>
+				
+				<div class="col-md-12">
+					<h4>Sentence</h4>
+					<p id="result4">Result1</p>
+					<p id="result5">Result1</p>
+					<p id="sentence_result" >Sentence result</p>
+					
+				</div>												
+			</div>
+
+		</div>
+		
+		<div id="restaurants">
+			<div class="card">
+				<div class="row">
+					<div class="col-sm-4 no-margin" >
+						<img class="img-fluid card-img" src="https://cdn.kiwilimon.com/recetaimagen/34016/39654.jpg"/>
+					</div>							
+					<div class="col-sm-8 no-margin">
+						<div class="col-sm-9">
+							<h1 class="card-title">Miguel Cocina</h1>
+							<div class="subtitle">
+								<span class="subtitle1">Coronado </span>
+								<span class="subtitle2"> Casual Dining </span>
+							</div>	
+						</div>
+						<div class="details">
+							<span class="schedule">Open Now </span>
+							<span class="type">Mexican</span>
+							<span class="cost">Cost</span>
+						</div>							
+					</div>						
+				</div>						
+				<div class="rating">
+					<span class="rating_no">4.7</span><span class="rating-total">/5</span>
+				</div>
+				<div class="votes">
+					<span class="">749 votes</span>
+				</div>												
+			</div>	
+		</div>		
+		
+		
+	</body>
+	
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>	
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>	
+
+
+	<script>
+		
+		$("#results").hide();
+		$("#restaurants").hide();		
+		
+		$("#finish_btn").click(function(){
+			
+			$("#quiz").hide();
+			
+			
+			$("#results").show();
+			$("#restaurants").show();
+			
+			var results = {
+				question_one: $("#question_one").val(),
+				tech_one: $("#tech1").val(),
+				tech_two: $("#tech2").val(),
+				tech_three: $("#tech3").val(),				
+				tech_fourth: $("#tech4").val(),
+				tech_five: $("#tech5").val(),
+				question_three: $("#question_three").val(),
+				question_fourth: $("#question_fourth").val(),
+				question_five: $("#question_five").val()
+			}
+			
+			$("#result1").html(results.question_one);
+
+			if(document.getElementById('tech1').checked){
+				$("#tech1_answer").append(" Correct !");
+			}
+			if(document.getElementById('tech2').checked){
+				$("#tech2_answer").append(" Wrong !");
+			}
+			if(document.getElementById('tech3').checked){
+				$("#tech3_answer").append(" Correct !");
+			}						
+			if(document.getElementById('tech4').checked){
+				$("#tech4_answer").append(" Wrong !");
+			}			
+			if(document.getElementById('tech5').checked){
+				$("#tech5_answer").append(" Wrong !");
+			}			
+			
+			function palindrome(str) {
+			  var re = /[\W_]/g;
+			  var lowRegStr = str.toLowerCase().replace(re, '');
+			  var reverseStr = lowRegStr.split('').reverse().join(''); 
+			  return reverseStr === lowRegStr;
+			}
+			
+			var pali = palindrome(results.question_three);
+
+			if(pali == true){
+				$("#result3").html(results.question_three + " is a correct palindrome !");
+			}else{
+				$("#result3").html(results.question_three + " is a wrong palindrome !");
+			}
+
+			function ReverseString(str) { 
+			  
+			    // Check input 
+			    if(!str || str.length < 2 ||  
+			            typeof str!== 'string') { 
+			        return 'Not valid';  
+			    } 
+			      
+			    // Take empty array revArray 
+			    const revArray = []; 
+			    const length = str.length - 1; 
+			      
+			    // Looping from the end 
+			    for(let i = length; i >= 0; i--) { 
+			        revArray.push(str[i]); 
+			    } 
+			      
+			    // Joining the array elements 
+			    return revArray.join(''); 
+			} 			
+			
+			$("#result4").html(results.question_fourth);
+			$("#result5").html(results.question_five);
+			
+			var reverse_string = ReverseString(results.question_fourth);
+			
+			if(reverse_string == results.question_five){
+				$("#sentence_result").html("Correct ! ");
+			}else{
+				$("#sentence_result").html("Wrong ! ");
+			}			
+			
+		});
+		
+		
+	
+		//Api Key		fb4980e39edcce855d278c21487b00ab
+		
+		//San diego is 302
+		
+		var san_diego_places = [];
+		$.ajax({
+		    type: 'POST',
+		    url: "https://developers.zomato.com/api/v2.1/establishments?city_id=302",
+		    headers: {
+		        "user-key":"fb4980e39edcce855d278c21487b00ab"
+		    }
+		}).done(function(data) { 
+			san_diego_places = data;
+			
+			var total_places = san_diego_places.establishments.length;
+
+			for(var i=0; i<total_places; i++){
+				$.ajax({
+				    type: 'POST',
+				    url: "https://developers.zomato.com/api/v2.1/restaurant?res_id=" + san_diego_places.establishments[i].establishment.id,
+				    //url: "https://developers.zomato.com/api/v2.1/restaurant?res_id=16",
+				    headers: {
+				        "user-key":"fb4980e39edcce855d278c21487b00ab"
+				    }
+				}).done(function(establisment_data) {
+					//console.log(establisment_data);
+					console.log(establisment_data);
+				});
+			}
+			
+			
+		});
+
+		
+
+		
+	</script>
+	
+</html>	
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
